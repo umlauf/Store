@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+     .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') Mosaic Online
+        
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          ul.nav.navbar-nav
+            -var obj = { 'home':'Home', 'produtos':'Produtos', 'login':'Login' }
+            -each val, key in obj
+                 -if (id == key)
+                     li.active
+                       a(href=key == 'home' ? '/' : '/#{key}') #{val}
+                 -else            
+                     li
+                       a(href=key == 'home' ? '/' : '/#{key}') #{val}
+        
+          if session && session.user
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href="/logout") Sair     
+              
+    .container
+      block content

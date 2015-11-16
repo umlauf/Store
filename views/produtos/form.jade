@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .container
+    
+    form(method="post" action="create")
+      .row
+        .col-md-5
+          .form-group
+            label(for="titulo") Título:
+            input(type="text", name="titulo", value=titulo, class="form-control")
+      .row
+        .col-md-5
+          .form-group
+            label(for="descricao") Descrição:
+            input(type="text", name="descricao", value=descricao, class="form-control")
+      
+      input(type="submit", value="Salvar", class="btn btn-default")
+ 
+  script(src='/javascripts/bundle.js')
