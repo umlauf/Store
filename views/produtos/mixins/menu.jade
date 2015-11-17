@@ -1,0 +1,15 @@
+mixin menu(ativo)
+  ul.nav.nav-pills.nav-stacked
+    if ativo == "index"
+      li.active
+        a(href="/produtos") Home
+    else
+      li
+        a(href="/produtos") Home
+      
+    if ativo == "novo"
+      li.active
+        a(href="/produtos/novo") Novo
+    else
+      li
+        a(href="/produtos/novo") Novo

@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -15,12 +16,32 @@ var login = require('./routes/login');
 var logout = require('./routes/logout');
 
 var app = express();
+var store = new MongoDBStore(
+  {
+    uri: 'mongodb://localhost:27017/klingklang_sessions',
+    collection: 'sessions'
+  });
+
+store.on('error', function(error) {
+  assert.ifError(error);
+  assert.ok(false);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(session({secret: 'ssshhhhh'}));
+//app.use(session({secret: 'ssshhhhh'}));
+//http://stackoverflow.com/questions/24477035/express-4-0-express-session-with-odd-warning-message
+app.use(require('express-session')({
+  secret: 'klingklangsecret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  resave: true,
+  saveUninitialized: true
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

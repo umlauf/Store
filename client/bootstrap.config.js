@@ -1,7 +1,8 @@
 module.exports = {
   scripts: {
     'dropdown': true,
-    'modal': true
+    'modal': true,
+    'carousel': true
   },
   styles: {
     "mixins": true,
@@ -29,8 +30,11 @@ module.exports = {
 
     "modals": true,
     "tooltip": true,
+    "carousel": true,
 
     "utilities": true,
-    "responsive-utilities": true
+    "responsive-utilities": true,
+    "jumbotron": true,
+    "thumbnails": true
   }
 };

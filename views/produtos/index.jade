@@ -1,10 +1,14 @@
 extends ../layout
+include mixins/menu.jade
 
 block content
 
-  ul
-      each produto, i in produtos
-          li
-              a(href="/produtos/#{produto._id}")= produto.titulo
-
-  script(src='/javascripts/bundle.js')
+  .row
+    .col-md-3
+      +menu("index")
+    
+    .col-md-9
+      ul
+          each produto, i in produtos
+              li
+                  a(href="/produtos/#{produto._id}")= produto.titulo

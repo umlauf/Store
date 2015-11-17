@@ -2,8 +2,25 @@ extends layout
 
 block content
 
-  p Welcome to #{title}
-  
   p #{session.user}
 
-  script(src='/javascripts/bundle.js')
+  .row
+    .col-md-2
+      p Coluna
+    .col-md-10
+      .row
+        .col-md-4
+          .thumbnail
+            .caption
+              h4 A
+              p Blah blah blah
+        .col-md-4
+          .thumbnail
+            .caption
+              h4 B
+              p Blah blah blah
+        .col-md-4
+          .thumbnail
+            .caption
+              h4 C
+              p Blah blah blah
