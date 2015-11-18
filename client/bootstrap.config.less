@@ -1,8 +1,76 @@
-body {
-  padding-top: 5px;/*50px;*/
+/* Sticky footer styles ------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
 }
 
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 300px;
+  padding-bottom: 300px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 300px;
+  background-color: #475E69;
+}
+
+.footer .container {
+  color: #FFFFFF;
+  padding-top: 20px;
+}
+
+
+
+/* Navbar ------------------------------------- */
+
 @navbar-inverse-bg: #232F3E;
+//@navbar-default-bg: #FFFFFF;
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+.navbar button#procurabtn {
+  margin-left: 10px;
+}
+
+/*
+.navbar input#procuratxt {
+  width: 300px;
+}
+*/
+
+.navbar-right li#cartinfo a {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+span#carticn {
+  font-size: 22px;
+  margin-right: 5px;
+  /*color: #FBEE00;*/
+}
+
+span#cartqty {
+  font-size: 22px;
+  font-weight: 700;
+  /*color: #FBEE00;*/
+}
+
+/*
+span#carticn.glyphicon,
+span#cartqty.glyphicon {
+  line-height: 0;
+}
+*/
+
+/* Carousel ------------------------------------- */
+
 @carousel-control-width: 10%;
 
 .carousel-control.left,
@@ -14,30 +82,12 @@ body {
   margin-bottom: 10px;
 }
 
-.navbar {
-  margin-bottom: 10px !important;
-}
-
-.navbar input#procuratxt {
-  width: 300px;
-}
-
-.navbar button#procurabtn {
-  margin-left: 10px;
-}
-
-span#carticn {
-  font-size: 14px;
-  margin-right: 5px;
-  /*color: #FBEE00;*/
-}
-
-span#cartqty {
-  font-size: 14px;
-  font-weight: 700;
-  /*color: #FBEE00;*/
-}
-
 .thumbnail {
   height: 300px;
 }
+
+
+.container-topo {
+  margin-top: 20px;
+}
+

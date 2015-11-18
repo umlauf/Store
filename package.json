@@ -25,6 +25,8 @@
     "less-loader": "^2.2.1",
     "mongoose": "^4.2.4",
     "morgan": "~1.6.1",
+    "node-jsx": "^0.13.3",
+    "react": "^0.14.2",
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",

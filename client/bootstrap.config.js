@@ -1,7 +1,7 @@
 module.exports = {
   scripts: {
+    'transition': true,
     'dropdown': true,
-    'modal': true,
     'carousel': true
   },
   styles: {
@@ -22,19 +22,16 @@ module.exports = {
     "button-groups": true,
     "navs": true,
     "navbar": true,
-    "breadcrumbs": true,
     "labels": true,
     "list-group": true,
     "panels": true,
     "close": true,
 
-    "modals": true,
     "tooltip": true,
     "carousel": true,
 
     "utilities": true,
     "responsive-utilities": true,
-    "jumbotron": true,
     "thumbnails": true
   }
 };

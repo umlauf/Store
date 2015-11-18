@@ -3,68 +3,47 @@ html
   head
     title Mosaic Online
   body
-    .container
-      .navbar.navbar-inverse
-       .container-fluid
-          .navbar-header
-            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.navbar-brand(href='/') Mosaic Online
-          
-          .navbar-collapse.collapse.navbar-responsive-collapse
-            ul.nav.navbar-nav
-              -var obj = { 'home':'Home', 'produtos':'Produtos', 'login':'Login' }
-              -each val, key in obj
-                   -if (id == key)
-                       li.active
-                         a(href=key == 'home' ? '/' : '/#{key}') #{val}
-                   -else            
-                       li
-                         a(href=key == 'home' ? '/' : '/#{key}') #{val}
-          
-             form.navbar-form.navbar-left(role="search")
-               .form-group
-                 input#procuratxt.form-control(type="text", name="busca", placeholder="Procurar")
-                button#procurabtn.btn.btn-default(type="submit") OK
-          
-            ul.nav.navbar-nav.navbar-right
-              if session && session.user
-                li
-                  a(href="/logout") Sair
+    .navbar.navbar-inverse.navbar-static-top
+     .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') Mosaic Online
+        
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          ul.nav.navbar-nav
+            -var obj = { 'home':'Home', 'produtos':'Produtos', 'login':'Login' }
+            -each val, key in obj
+                 -if (id == key)
+                     li.active
+                       a(href=key == 'home' ? '/' : '/#{key}') #{val}
+                 -else            
+                     li
+                       a(href=key == 'home' ? '/' : '/#{key}') #{val}
+        
+           form.navbar-form.navbar-left(role="search")
+             .form-group
+               input#procuratxt.form-control(type="text", name="busca", placeholder="Procurar")
+              button#procurabtn.btn.btn-default(type="submit") OK
+        
+          ul.nav.navbar-nav.navbar-right
+            if session && session.user
               li
-                a(href="/")
-                  span#carticn.glyphicon.glyphicon-shopping-cart
-                  span#cartqty 0
+                a(href="/logout") Sair
+            li#cartinfo
+              a(href="/")
+                span#carticn.glyphicon.glyphicon-shopping-cart
+                span#cartqty 0
+    
+    block topo
 
-      #destaques.carousel.slide(data-ride='carousel')
-        // Indicators
-        ol.carousel-indicators
-          li.active(data-target='#destaques', data-slide-to='0')
-          li(data-target='#destaques', data-slide-to='1')
-          li(data-target='#destaques', data-slide-to='2')
-        // Wrapper for slides
-        .carousel-inner(role='listbox')
-          .item.active
-            img(src='images/01.png', alt='1')
-            .carousel-caption 1
-          .item
-            img(src='images/02.png', alt='2')
-            .carousel-caption 2
-          .item
-            img(src='images/03.png', alt='3')
-            .carousel-caption 3
-            
-        // Controls
-        a.left.carousel-control(href='#destaques', role='button', data-slide='prev')
-          span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
-          span.sr-only Previous
-        a.right.carousel-control(href='#destaques', role='button', data-slide='next')
-          span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
-          span.sr-only Next
-
-
+    .container
       block content
 
-    script(src='/javascripts/bundlemain.js')
+    footer.footer
+      .container
+        p &copy 2015
+
+    script(src='/javascripts/main.bundle.js')
