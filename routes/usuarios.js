@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var User = mongoose.model('users');
+var User = mongoose.model('usuarios');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  User.find(function(err, users){
-    console.log(users)
+  Usuario.find(function(err, usuarios){
+    console.log(usuarios)
     res.render(
-      'users',
-      {users : users}
+      'usuarios',
+      {usuarios : usuarios}
     );
   });
 });

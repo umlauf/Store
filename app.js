@@ -10,15 +10,14 @@ var bodyParser = require('body-parser');
 require('./db');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var usuarios = require('./routes/usuarios');
 var produtos = require('./routes/produtos');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 
 var app = express();
-var store = new MongoDBStore(
-  {
-    uri: 'mongodb://localhost:27017/klingklang_sessions',
+var store = new MongoDBStore({
+    uri: 'mongodb://localhost:27017/owstore_sessions',
     collection: 'sessions'
   });
 
@@ -31,10 +30,12 @@ store.on('error', function(error) {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.locals.sprintf = require("sprintf-js").sprintf;
+
 //app.use(session({secret: 'ssshhhhh'}));
 //http://stackoverflow.com/questions/24477035/express-4-0-express-session-with-odd-warning-message
 app.use(require('express-session')({
-  secret: 'klingklangsecret',
+  secret: 'owstoresecret',
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
   },
@@ -52,7 +53,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/usuarios', usuarios);
 app.use('/produtos', produtos);
 app.use('/login', login);
 app.use('/logout', logout);

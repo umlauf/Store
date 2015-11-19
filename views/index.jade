@@ -5,21 +5,24 @@ block topo
   #destaques.carousel.slide(data-ride='carousel')
     // Indicators
     ol.carousel-indicators
-      li.active(data-target='#destaques', data-slide-to='0')
-      li(data-target='#destaques', data-slide-to='1')
-      li(data-target='#destaques', data-slide-to='2')
+      each destaque, i in destaques
+        if(i == 0)
+          li.active(data-target='#destaques', data-slide-to='#{i}')
+        else
+          li(data-target='#destaques', data-slide-to='#{i}')
+      
     // Wrapper for slides
     .carousel-inner(role='listbox')
-      .item.active
-        img(src='images/01.png', alt='1')
-        .carousel-caption 1
-      .item
-        img(src='images/02.png', alt='2')
-        .carousel-caption 2
-      .item
-        img(src='images/03.png', alt='3')
-        .carousel-caption 3
-        
+      each destaque, i in destaques
+        if(i == 0)
+          .item.active
+            img(src='images/#{destaque.imagens.destaque}', alt='#{destaque.nome}')
+            .carousel-caption #{destaque.nome}
+        else
+          .item
+            img(src='images/#{destaque.imagens.destaque}', alt='#{destaque.nome}')
+            .carousel-caption #{destaque.nome}
+                  
     // Controls
     a.left.carousel-control(href='#destaques', role='button', data-slide='prev')
       span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
@@ -34,46 +37,21 @@ block content
 
   #app!= content
   
-    .row
+  //#{destaques.length}
+  
+  .row
+    each p in produtos
       .col-md-3
         .thumbnail
+          img(src='images/#{p.imagens.normal}', alt='#{p.nome}')
           .caption
-            h4 A
-            p A
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 B
-            p B
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 C
-            p C
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 D
-            p D
-            
-    .row
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 E
-            p E
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 F
-            p F
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 G
-            p G
-      .col-md-3
-        .thumbnail
-          .caption
-            h4 H
-            p H
+            .row
+              .col-md-8
+                //h4 #{sprintf("%s", function() { return p.valor.toString().replace('.',',')  })}
+                h4 #{sprintf("%.2f", p.valor)}
+              .col-md-4.text-right
+                button.btn.btn-default
+                  i.fa.fa-cart-plus.fa-lg
+            h4 #{p.nome}
+            p #{p.descricao}
+
