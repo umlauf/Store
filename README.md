@@ -13,6 +13,12 @@ Na pasta db:
 
 ### Instalando as dependências
 
+#### Webpack:
+
+    npm install webpack -g
+
+#### Dependências da aplicação:
+
 Em /:
 
     npm install

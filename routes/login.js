@@ -1,10 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/',function(req, res, next) {
+router.get('/', function(req, res, next) {
   var sess = req.session;
-  sess.user = "sergio";
+
   res.render('login', { id: 'login', session: sess });
+
+});
+
+router.post('/enter', function(req, res, next) {
+
+  // TODO: validar usuário no banco.
+
+  var sess = req.session;
+  sess.user = req.body.username;
+
+  res.redirect('/');
 
 });
 

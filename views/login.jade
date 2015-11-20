@@ -5,4 +5,18 @@ block topo
   
 block content
 
-  p #{session.user}
+  h2 Entrar
+  
+  form(method="post", action="/login/enter")
+    .row
+      .col-md-3
+        .form-group
+          label(for="username") Login
+          input.form-control(type="text" id="username" name="username")
+    .row
+      .col-md-3
+        .form-group
+          label(for="senha") Senha
+          input.form-control(type="password" id="senha" name="senha")
+
+    button.btn.btn-default(type="submit") Submit

@@ -32,12 +32,7 @@ block topo
       span.sr-only Next
 
 block content
-
-  p #{session.user}
-
   #app!= content
-  
-  //#{destaques.length}
   
   .row
     each p in produtos
@@ -48,10 +43,10 @@ block content
             .row
               .col-md-8
                 //h4 #{sprintf("%s", function() { return p.valor.toString().replace('.',',')  })}
-                h4 #{sprintf("%.2f", p.valor)}
+                //h4 #{sprintf("%.2f", p.valorFormatado())}
+                h4 #{p.valorFormatado()}
               .col-md-4.text-right
                 button.btn.btn-default
                   i.fa.fa-cart-plus.fa-lg
-            h4 #{p.nome}
+            h5 #{p.nome}
             p #{p.descricao}
-

@@ -29,9 +29,14 @@ html
               button#procurabtn.btn.btn-default(type="submit") OK
         
           ul.nav.navbar-nav.navbar-right
-            if session && session.user
-              li
-                a(href="/logout") Sair
+            if session && session.user                
+              li.dropdown
+                a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{session.user}
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href="/logout")
+                      i.fa.fa-sign-out  Sair  
             li#cartinfo
               a(href="/")
                 span#carticn.glyphicon.glyphicon-shopping-cart

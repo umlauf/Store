@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
+var Price = require('format-price');
 
 var Usuario = new Schema({
   nome: String,
@@ -27,6 +28,11 @@ var Produto = new Schema({
   imagens : imagensSchema,
   destaque : Boolean
 });
+
+Produto.method('valorFormatado', function() {
+    return Price.format( 'pt-BR', 'BRL', this.valor);
+});
+
 
 
 mongoose.model('produtos', Produto);

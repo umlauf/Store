@@ -13,6 +13,7 @@
     "exports-loader": "^0.6.2",
     "express": "~4.13.1",
     "express-session": "^1.12.1",
+    "format-price": "0.0.2",
     "jade": "~1.11.0",
     "mongoose": "^4.2.4",
     "morgan": "~1.6.1",
@@ -23,10 +24,10 @@
     "url-loader": "^0.5.6"
   },
   "devDependencies": {
-    "expose-loader": "^0.7.1",
     "bootstrap": "^3.3.5",
     "bootstrap-webpack": "0.0.5",
     "css-loader": "^0.22.0",
+    "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.4.0",
@@ -36,6 +37,7 @@
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "style-loader": "^0.13.0",
+    "supervisor": "^0.9.1",
     "webpack": "^1.12.6"
   }
 }
