@@ -14,7 +14,7 @@ html
         
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            -var obj = { 'home':'Home', 'produtos':'Produtos', 'login':'Login' }
+            -var obj = { 'home':'Home', 'produtos':'Produtos' }
             -each val, key in obj
                  -if (id == key)
                      li.active
@@ -35,8 +35,11 @@ html
                   span.caret
                 ul.dropdown-menu
                   li
-                    a(href="/logout")
-                      i.fa.fa-sign-out  Sair  
+                    a(href="/logout") #[i.fa.fa-sign-out] Sair
+            else
+              li
+                a(href="/login") Login
+              
             li#cartinfo
               a(href="/")
                 span#carticn.glyphicon.glyphicon-shopping-cart

@@ -41,14 +41,24 @@ router.get('/',
   }
 );
 
-function buscaDestaques() {
-  Produto.find({destaque : true}, function(err, destaques) {
-    //console.log(produtos);
-    res.render(
-      'index',
-      {content: content, destaques : destaques, id: 'home', session : sess}
-    );
-  });
-}
+// function buscaDestaques() {
+//   Produto.find({destaque : true}, function(err, destaques) {
+//     //console.log(produtos);
+//     res.render(
+//       'index',
+//       {content: content, destaques : destaques, id: 'home', session : sess}
+//     );
+//   });
+// }
+
+
+router.get('/teste', function(req, res, next) {
+  res.render('teste');
+});
+
+
+router.get('/testing', function(req, res, next) {
+  res.send('OK deu certo');
+});
 
 module.exports = router;

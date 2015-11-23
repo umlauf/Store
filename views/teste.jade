@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  
+  .row
+    .col-md-12
+      button.btn.btn-default(onclick="testeAjax();") Teste
+  
+      #result
+  
+  script.
+    function testeAjax() {
+
+      $.get('/testing', null, function(data) {
+          $('#result').html(data);
+      });
+
+    }
