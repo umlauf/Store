@@ -10,10 +10,8 @@ var bodyParser = require('body-parser');
 require('./db');
 
 var routes = require('./routes/index');
-var usuarios = require('./routes/usuarios');
 var produtos = require('./routes/produtos');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
+var conta = require('./routes/conta');
 
 var app = express();
 var store = new MongoDBStore({
@@ -53,10 +51,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/usuarios', usuarios);
 app.use('/produtos', produtos);
-app.use('/login', login);
-app.use('/logout', logout);
+app.use('/conta', conta);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

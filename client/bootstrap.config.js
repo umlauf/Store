@@ -32,6 +32,7 @@ module.exports = {
 
     "utilities": true,
     "responsive-utilities": true,
-    "thumbnails": true
+    "thumbnails": true,
+    "alerts":true
   }
 };

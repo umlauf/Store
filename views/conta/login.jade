@@ -1,0 +1,27 @@
+extends ../layout
+
+block topo
+  .container-topo
+  
+block content
+
+  h2 Entrar
+  
+  .row
+    .col-md-6
+      form(method="post")
+        .row
+          .col-md-6
+            .form-group
+              label(for="login") Login
+              input.form-control(type="text" id="login" name="login")
+        .row
+          .col-md-6
+            .form-group
+              label(for="senha") Senha
+              input.form-control(type="password" id="senha" name="senha")
+        
+        button.btn.btn-default(type="submit") Submit
+
+        if message != undefined && message != ""
+          .alert.alert-danger.mg-tp-20(role="alert") #{message}

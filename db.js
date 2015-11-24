@@ -2,6 +2,9 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 var Price = require('format-price');
 
+
+
+// Usuario -------------------------------------------------------------
 var Usuario = new Schema({
   nome: String,
   login : String,
@@ -12,6 +15,8 @@ var Usuario = new Schema({
 mongoose.model('usuarios', Usuario);
 
 
+
+// Produto -------------------------------------------------------------
 var imagensSchema = new Schema({
    normal : String,
    grande : String,
@@ -33,9 +38,8 @@ Produto.method('valorFormatado', function() {
     return Price.format( 'pt-BR', 'BRL', this.valor);
 });
 
-
-
 mongoose.model('produtos', Produto);
+
 
 
 mongoose.connect('mongodb://localhost:27017/owstore');

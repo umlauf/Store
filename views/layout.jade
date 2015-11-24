@@ -14,7 +14,7 @@ html
         
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            -var obj = { 'home':'Home', 'produtos':'Produtos' }
+            -var obj = { 'produtos':'Produtos' }
             -each val, key in obj
                  -if (id == key)
                      li.active
@@ -31,15 +31,18 @@ html
           ul.nav.navbar-nav.navbar-right
             if session && session.user                
               li.dropdown
-                a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{session.user}
+                a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{session.nome}
                   span.caret
                 ul.dropdown-menu
                   li
-                    a(href="/logout") #[i.fa.fa-sign-out] Sair
+                    a(href="/conta") #[i.fa.fa-user] Meus dados
+                  li
+                    a(href="/conta/sair") #[i.fa.fa-sign-out] Sair
             else
               li
-                a(href="/login") Login
-              
+                a(href="/conta/login") Login
+                li
+                  a(href="/conta/criar") Cadastre-se
             li#cartinfo
               a(href="/")
                 span#carticn.glyphicon.glyphicon-shopping-cart
