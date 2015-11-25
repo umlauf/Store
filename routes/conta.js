@@ -4,13 +4,12 @@ var mongoose = require('mongoose');
 var Usuario = mongoose.model('usuarios');
 
 router.get('/', function(req, res, next) {
-  var sess = req.session;
-  Usuario.findOne({login:sess.user}, function(err, usuario) {
+  Usuario.findOne({login:req.session.user}, function(err, usuario) {
 
   //  console.log(usuario);
 
     if(usuario != undefined) {
-      res.render('conta/index', { usuario:usuario, session:sess });
+      res.render('conta/index', { usuario:usuario });
     } else {
       res.redirect('/conta/login?re=conta');
     }
@@ -19,10 +18,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var sess = req.session;
-
   var query = {
-    login:sess.user
+    login: req.session.user
   };
 
   var dados = {
@@ -38,8 +35,8 @@ router.post('/', function(req, res, next) {
 
     // console.log(usuario);
 
-    sess.nome = usuario.nome;
-    res.render('conta/index', { usuario:usuario, session:sess });
+    req.session.nome = usuario.nome;
+    res.render('conta/index', { usuario:usuario });
   });
 });
 
@@ -47,8 +44,7 @@ router.post('/', function(req, res, next) {
 
 
 router.get('/login', function(req, res, next) {
-  var sess = req.session;
-  res.render('conta/login', { id: 'login', session: sess });
+  res.render('conta/login', { id: 'login' });
 });
 
 router.post('/login', function(req, res, next) {
@@ -58,16 +54,15 @@ router.post('/login', function(req, res, next) {
     console.log(usuario);
 
     if(usuario != undefined) {
-      var sess = req.session;
-      sess.user = req.body.login;
-      sess.nome = usuario.nome;
+      req.session.user = req.body.login;
+      req.session.nome = usuario.nome;
       if(req.query.re == "conta") {
         res.redirect('/conta');
       } else {
         res.redirect('/');
       }
     } else {
-      res.render('conta/login', { id: 'login', session: sess, message : "Login ou senha inválida." });
+      res.render('conta/login', { id: 'login', message : "Login ou senha inválida." });
     }
   });
 

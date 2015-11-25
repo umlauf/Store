@@ -15,18 +15,12 @@ var React = require("react"),
 router.get('/',
   function(req, res, next) {
     Produto.find({destaque : true}, function(err, destaques) {
-      // res.render(
-      //   'index',
-      //   {content: content, destaques : destaques, id: 'home', session : sess}
-      // );
-      //req.destaques = JSON.stringify(destaques);
       req.destaques = destaques;
       //console.log(req.destaques);
       next();
     });
   },
   function(req, res) {
-    var sess = req.session;
     var content = ""; //React.renderToString(App());
 
     //console.log(req.destaques);
@@ -35,21 +29,13 @@ router.get('/',
       //console.log(produtos);
       res.render(
         'index',
-        {content: content, destaques : req.destaques, produtos : produtos, id: 'home', session : sess}
+        {content: content, destaques : req.destaques, produtos : produtos, id: 'home'}
       );
     });
   }
 );
 
-// function buscaDestaques() {
-//   Produto.find({destaque : true}, function(err, destaques) {
-//     //console.log(produtos);
-//     res.render(
-//       'index',
-//       {content: content, destaques : destaques, id: 'home', session : sess}
-//     );
-//   });
-// }
+
 
 
 router.get('/teste', function(req, res, next) {

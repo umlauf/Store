@@ -5,13 +5,11 @@ var Produto = mongoose.model('produtos');
 
 /* GET produtos listing. */
 router.get('/', function(req, res, next) {
-
-  var sess = req.session;
   Produto.find(function(err, produtos){
     //console.log(produtos);
     res.render(
       'produtos/index',
-      {title : "Produtos", produtos : produtos, id: 'produtos', session : sess}
+      {title : "Produtos", produtos : produtos, id: 'produtos'}
     );
   });
 
@@ -20,8 +18,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/novo', function(req, res, next) {
 
-    var sess = req.session;
-    res.render('produtos/form', {title : "Produtos", id: 'produtos', session : sess});
+    res.render('produtos/form', {title : "Produtos", id: 'produtos'});
 
 });
 
@@ -40,14 +37,13 @@ router.post('/create', function(req, res, next) {
 /* GET um produto */
 router.get('/:id', function(req, res, next) {
 
-    var sess = req.session;
     var id = req.params.id;
 
     Produto.findOne({ _id: id },function(err, prod) {
       //console.log(prod);
       res.render(
         'produtos/show',
-        {title : "Produto", produto: prod, id: 'produtos', session : sess}
+        {title : "Produto", produto: prod, id: 'produtos'}
       );
     });
 
