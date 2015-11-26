@@ -49,20 +49,28 @@ router.get('/login', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
 
-  Usuario.findOne({login:req.body.login, senha:req.body.senha}, function(err, usuario) {
+  Usuario.findOne({login:req.body.login}, function(err, usuario) {
 
-    console.log(usuario);
+    //console.log(usuario);
 
-    if(usuario != undefined) {
-      req.session.user = req.body.login;
-      req.session.nome = usuario.nome;
-      if(req.query.re == "conta") {
-        res.redirect('/conta');
-      } else {
-        res.redirect('/');
-      }
+    if(usuario) {
+      usuario.validPassword(req.body.senha, function(err, valid) {
+        if(err) throw err;
+
+        if(valid) {
+          req.session.user = req.body.login;
+          req.session.nome = usuario.nome;
+          if(req.query.re == "conta") {
+            res.redirect('/conta');
+          } else {
+            res.redirect('/');
+          }
+        } else {
+          res.render('conta/login', { id: 'login', message : "Senha inválida." });
+        }
+      });
     } else {
-      res.render('conta/login', { id: 'login', message : "Login ou senha inválida." });
+      res.render('conta/login', { id: 'login', message : "Login inválido." });
     }
   });
 
@@ -84,7 +92,7 @@ router.post('/criar', function(req, res, next) {
 
   new Usuario(usuario)
     .save(function(err, user) {
-      console.log(user)
+      //console.log(user)
       res.redirect('/conta');
   });
 });

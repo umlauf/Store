@@ -44,7 +44,7 @@ block content
               .col-md-8
                 h4 #{p.valorFormatado()}
               .col-md-4.text-right
-                button.btn.btn-default
+                a.btn.btn-default(href="/carrinho/#{p._id}")
                   i.fa.fa-cart-plus.fa-lg
             h5 #{p.nome}
             p #{p.descricao}

@@ -12,6 +12,7 @@ require('./db');
 var routes = require('./routes/index');
 var produtos = require('./routes/produtos');
 var conta = require('./routes/conta');
+var carrinho = require('./routes/carrinho');
 
 var app = express();
 var store = new MongoDBStore({
@@ -60,6 +61,8 @@ app.use(function(req, res, next) {
 app.use('/', routes);
 app.use('/produtos', produtos);
 app.use('/conta', conta);
+app.use('/carrinho', carrinho);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
