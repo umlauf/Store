@@ -44,10 +44,12 @@ html
                 li
                   a(href="/conta/criar") Cadastre-se
             li#cartinfo
-              a(href="/")
+              a(href="/carrinho")
                 span#carticn.glyphicon.glyphicon-shopping-cart
-                span#cartqty 0
-    
+                if session.carrinho && session.carrinho.items
+                  span#cartqty #{session.carrinho.items.length}
+                else
+                  span#cartqty 0
     block topo
 
     .container

@@ -6,5 +6,26 @@ block topo
 block content
 
   .row
-    .col-md-3
+    .col-md-12.col-sm-12
       p #{produto}
+      
+      if items && items.length > 0
+        table.table.table-condensed
+          thead
+            tr
+              th Produto
+              th Preço Unitário
+              th Quantidade
+              th Total
+          tbody
+            each item, i in items
+              tr
+                td
+                  a(href="/produtos/#{item._id}")= item.nome
+                td.text-right #{item.valorFormatado()}
+                td 
+                  input.form-control.text-right.input-sm(type="text" id="nome" name="nome" value="#{item.qtde}")
+                td.text-right #{item.valorTotalFormatado}
+                
+      else
+        p Vazio
