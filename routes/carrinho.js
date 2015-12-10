@@ -10,13 +10,12 @@ router.get('/', function(req, res, next) {
     var predicate = [];
     req.session.carrinho.items.forEach(function(item) {
       predicate.push(item.produto_id);
-      console.log(item.produto_id);
+      //console.log(item.produto_id);
     });
 
-    Produto.find({ _id: { $in: predicate } }, function(err, produtos){
+    Produto.find({ _id: { $in: predicate } }, function(err, produtos) {
       // TODO: melhorar esse loop dentro de loop.
       if(produtos) {
-        console.log("ok");
         produtos.forEach(function(produto) {
           req.session.carrinho.items.forEach(function(item) {
             if(produto._id == item.produto_id) {
@@ -54,6 +53,28 @@ router.get('/:produto_id', function(req, res, next) {
     }
   }
   res.redirect('/carrinho');
+});
+
+
+router.get('/update/:produto_id', function(req, res, next) {
+  console.log("Produto = " + req.params.produto_id);
+  console.log("Quantidade = " + req.query.q);
+
+  req.session.carrinho.items.forEach(function(item, i) {
+    if(item.produto_id == req.params.produto_id) {
+      console.log("Produto Achado = " + item.produto_id + " no índice " + i);
+      item.qtde = req.query.q;
+      req.session.save(function(err) {
+        // session saved
+        if(err) {
+          res.json({ status: 'ERROR', msg: err });
+        } else {
+          res.json({ status: 'SUCCESS' })
+        }
+      })
+    }
+  });
+
 });
 
 

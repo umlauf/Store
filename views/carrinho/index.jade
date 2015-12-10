@@ -15,7 +15,7 @@ block content
             tr
               th Produto
               th Preço Unitário
-              th Quantidade
+              th.wd-200.text-center Quantidade
               th Total
           tbody
             each item, i in items
@@ -23,9 +23,12 @@ block content
                 td
                   a(href="/produtos/#{item._id}")= item.nome
                 td.text-right #{item.valorFormatado()}
-                td 
-                  input.form-control.text-right.input-sm(type="text" id="nome" name="nome" value="#{item.qtde}")
-                td.text-right #{item.valorTotalFormatado}
+                td
+                  .col-md-6.col-sm-6.col-xs-6
+                    input.form-control.text-right.input-sm(type="text" id="nome-#{item._id}" name="nome-#{item._id}" value="#{item.qtde}" data-valor="#{item.valor}")
+                  .col-md-6.col-sm-6.col-xs-6
+                    button.btn.btn-sm.btn-default(type="button" onclick="updateCart('#{item._id}');") Atualizar
+                td.text-right(id="total-#{item._id}") #{item.valorTotalFormatado}
                 
       else
         p Vazio
