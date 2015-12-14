@@ -29,6 +29,15 @@ block content
                   .col-md-6.col-sm-6.col-xs-6
                     button.btn.btn-sm.btn-default(type="button" onclick="updateCart('#{item._id}');") Atualizar
                 td.text-right(id="total-#{item._id}") #{item.valorTotalFormatado}
-                
+            tr
+              td(colspan="4").text-right
+                h3#total #{totalFormatado}
       else
-        p Vazio
+        p Seu carrinho está vazio!
+
+  .row
+    .col-md-6.col-sm-6
+      a.btn.btn-default Continuar comprando
+    .col-md-6.col-sm-6.text-right
+      if items && items.length > 0
+        a.btn.btn-primary Finalizar pedido

@@ -36,15 +36,4 @@ router.get('/',
 );
 
 
-
-
-router.get('/teste', function(req, res, next) {
-  res.render('teste');
-});
-
-
-router.get('/testing', function(req, res, next) {
-  res.send('OK deu certo');
-});
-
 module.exports = router;

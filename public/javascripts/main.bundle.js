@@ -65,6 +65,10 @@
 	        $("#total-" + produto_id).html(totalFormatado);
 	        $("#total-" + produto_id).fadeIn();
 	      });
+	      $("#total").fadeOut(function() {
+	        $("#total").html(result.totalFormatado);
+	        $("#total").fadeIn();
+	      });
 	    } else if (result.status == 'ERROR') {
 	      console.log( result.msg );
 	    }
