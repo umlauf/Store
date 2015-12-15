@@ -5,28 +5,35 @@ var Produto = mongoose.model('produtos');
 var Price = require('format-price');
 
 
+var produtosDoBd = function(carrinho, prox) {
+  var predicate = [];
+  carrinho.items.forEach(function(item) {
+    predicate.push(item.produto_id);
+    //console.log(item.produto_id);
+  });
+
+  var total = 0;
+  Produto.find({ _id: { $in: predicate } }, function(err, produtos) {
+    // TODO: melhorar esse loop dentro de loop.
+    if(produtos) {
+      produtos.forEach(function(produto) {
+        carrinho.items.forEach(function(item) {
+          if(produto._id == item.produto_id) {
+            produto.qtde = item.qtde;
+            produto.valorTotalFormatado = Price.format( 'pt-BR', 'BRL', produto.valor * produto.qtde);
+            total += produto.valor * produto.qtde;
+          }
+        });
+      });
+    }
+    prox(produtos, total);
+  });
+};
+
+
 router.get('/', function(req, res, next) {
   if(req.session.carrinho && req.session.carrinho.items) {
-    var predicate = [];
-    req.session.carrinho.items.forEach(function(item) {
-      predicate.push(item.produto_id);
-      //console.log(item.produto_id);
-    });
-
-    var total = 0;
-    Produto.find({ _id: { $in: predicate } }, function(err, produtos) {
-      // TODO: melhorar esse loop dentro de loop.
-      if(produtos) {
-        produtos.forEach(function(produto) {
-          req.session.carrinho.items.forEach(function(item) {
-            if(produto._id == item.produto_id) {
-              produto.qtde = item.qtde;
-              produto.valorTotalFormatado = Price.format( 'pt-BR', 'BRL', produto.valor * produto.qtde);
-              total += produto.valor * produto.qtde;
-            }
-          });
-        });
-      }
+    produtosDoBd(req.session.carrinho, function(produtos, total) {
       var totalFormatado = Price.format( 'pt-BR', 'BRL', total);
       res.render(
         'carrinho/index',
@@ -40,6 +47,23 @@ router.get('/', function(req, res, next) {
     );
   }
 });
+
+
+
+router.get('/checkout', function(req, res, next) {
+  if(req.session.carrinho && req.session.carrinho.items) {
+    produtosDoBd(req.session.carrinho, function(produtos, total) {
+      var totalFormatado = Price.format( 'pt-BR', 'BRL', total);
+      res.render(
+        'carrinho/checkout',
+        {items : produtos, total: total, totalFormatado: totalFormatado}
+      );
+    });
+  } else {
+    res.render('carrinho/checkout', {items : []});
+  }
+});
+
 
 
 router.get('/:produto_id', function(req, res, next) {
@@ -84,26 +108,7 @@ router.get('/update/:produto_id',
   },
   function(req, res, next) {
     if(req.session.carrinho && req.session.carrinho.items) {
-      var predicate = [];
-      req.session.carrinho.items.forEach(function(item) {
-        predicate.push(item.produto_id);
-        //console.log(item.produto_id);
-      });
-
-      var total = 0;
-      Produto.find({ _id: { $in: predicate } }, function(err, produtos) {
-        // TODO: melhorar esse loop dentro de loop.
-        if(produtos) {
-          produtos.forEach(function(produto) {
-            req.session.carrinho.items.forEach(function(item) {
-              if(produto._id == item.produto_id) {
-                produto.qtde = item.qtde;
-                produto.valorTotalFormatado = Price.format( 'pt-BR', 'BRL', produto.valor * produto.qtde);
-                total += produto.valor * produto.qtde;
-              }
-            });
-          });
-        }
+      produtosDoBd(req.session.carrinho, function(produtos, total) {
         var totalFormatado = Price.format( 'pt-BR', 'BRL', total);
         res.json({status: req.status, msg: req.msg, total: total, totalFormatado: totalFormatado});
       });
@@ -111,11 +116,9 @@ router.get('/update/:produto_id',
       res.json({ status: 'ERROR', msg: 'Carrinho vazio.', total: 0, totalFormatado: 'R$ 0,00' });
     }
   }
-
 );
 
 
-router.get('/total');
 
 
 module.exports = router;

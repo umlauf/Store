@@ -1,0 +1,48 @@
+extends ../layout
+
+block topo
+  .container-topo
+
+block content
+
+  .row
+    .col-md-12.col-sm-12
+      if items && items.length > 0
+        h3
+          span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x
+            strong.fa-stack-1x.fa-inverse 1
+          | Itens
+          
+        table.table.table-condensed
+          thead
+            tr
+              th Produto
+              th Preço Unitário
+              th.wd-200.text-center Quantidade
+              th Total
+          tbody
+            each item, i in items
+              tr
+                td #{item.nome}
+                td.text-right #{item.valorFormatado()}
+                td.text-right #{item.qtde}
+                td.text-right(id="total-#{item._id}") #{item.valorTotalFormatado}
+            tr
+              td(colspan="4").text-right
+                h3#total #{totalFormatado}
+                
+        h3
+          span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x
+            strong.fa-stack-1x.fa-inverse 2
+          |  Seus dados
+        
+        h3
+          span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x
+            strong.fa-stack-1x.fa-inverse 3
+          |  Forma de Pagamento
+        
+      else
+        p Seu carrinho está vazio!

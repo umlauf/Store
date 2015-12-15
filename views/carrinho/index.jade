@@ -7,8 +7,6 @@ block content
 
   .row
     .col-md-12.col-sm-12
-      p #{produto}
-      
       if items && items.length > 0
         table.table.table-condensed
           thead
@@ -37,7 +35,7 @@ block content
 
   .row
     .col-md-6.col-sm-6
-      a.btn.btn-default Continuar comprando
+      a.btn.btn-default(href="/") Continuar comprando
     .col-md-6.col-sm-6.text-right
       if items && items.length > 0
-        a.btn.btn-primary Finalizar pedido
+        a.btn.btn-primary(href="/carrinho/checkout") Finalizar pedido
