@@ -5,13 +5,13 @@ block topo
   .container-topo
 
 block content
-
-  .row
-    .col-md-3
-      +menu("index")
-    
-    .col-md-9
-      ul
-          each produto, i in produtos
-              li
-                  a(href="/produtos/#{produto._id}")= produto.nome
+  .container
+    .row
+      .col-md-3
+        +menu("index")
+      
+      .col-md-9
+        ul
+            each produto, i in produtos
+                li
+                    a(href="/produtos/#{produto._id}")= produto.nome

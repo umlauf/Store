@@ -32,19 +32,20 @@ block topo
       span.sr-only Next
 
 block content
-  #app!= content
-  
-  .row
-    each p in produtos
-      .col-md-3
-        .thumbnail
-          img(src='images/#{p.imagens.normal}', alt='#{p.nome}')
-          .caption
-            .row
-              .col-md-8
-                h4 #{p.valorFormatado()}
-              .col-md-4.text-right
-                a.btn.btn-default(href="/carrinho/#{p._id}")
-                  i.fa.fa-cart-plus.fa-lg
-            h5 #{p.nome}
-            p #{p.descricao}
+  .container
+    #app!= content
+    
+    .row
+      each p in produtos
+        .col-md-3
+          .thumbnail
+            img(src='images/#{p.imagens.normal}', alt='#{p.nome}')
+            .caption
+              .row
+                .col-md-8
+                  h4 #{p.valorFormatado()}
+                .col-md-4.text-right
+                  a.btn.btn-default(href="/carrinho/#{p._id}")
+                    i.fa.fa-cart-plus.fa-lg
+              h5 #{p.nome}
+              p #{p.descricao}

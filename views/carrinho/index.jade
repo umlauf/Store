@@ -4,38 +4,40 @@ block topo
   .container-topo
 
 block content
-
-  .row
-    .col-md-12.col-sm-12
-      if items && items.length > 0
-        table.table.table-condensed
-          thead
-            tr
-              th Produto
-              th Preço Unitário
-              th.wd-200.text-center Quantidade
-              th Total
-          tbody
-            each item, i in items
+  .container
+    .row
+      .col-md-12.col-sm-12
+        if items && items.length > 0
+          table.table.table-condensed
+            thead
               tr
-                td
-                  a(href="/produtos/#{item._id}")= item.nome
-                td.text-right #{item.valorFormatado()}
-                td
-                  .col-md-6.col-sm-6.col-xs-6
-                    input.form-control.text-right.input-sm(type="text" id="nome-#{item._id}" name="nome-#{item._id}" value="#{item.qtde}" data-valor="#{item.valor}")
-                  .col-md-6.col-sm-6.col-xs-6
-                    button.btn.btn-sm.btn-default(type="button" onclick="updateCart('#{item._id}');") Atualizar
-                td.text-right(id="total-#{item._id}") #{item.valorTotalFormatado}
-            tr
-              td(colspan="4").text-right
-                h3#total #{totalFormatado}
-      else
-        p Seu carrinho está vazio!
+                th Produto
+                th Preço Unitário
+                th.wd-200.text-center Quantidade
+                th Total
+            tbody
+              each item, i in items
+                tr
+                  td
+                    a(href="/produtos/#{item._id}")= item.nome
+                  td.text-right #{item.valorFormatado()}
+                  td
+                    .col-md-6.col-sm-6.col-xs-6
+                      input.form-control.text-right.input-sm(type="text" id="nome-#{item._id}" name="nome-#{item._id}" value="#{item.qtde}" data-valor="#{item.valor}")
+                    .col-md-6.col-sm-6.col-xs-6
+                      button.btn.btn-sm.btn-default(type="button" onclick="updateCart('#{item._id}');") Atualizar
+                  td.text-right(id="total-#{item._id}") #{item.valorTotalFormatado}
+              tr
+                td(colspan="4").text-right
+                  h3#total #{totalFormatado}
+        else
+          p Seu carrinho está vazio!
 
-  .row
-    .col-md-6.col-sm-6
-      a.btn.btn-default(href="/") Continuar comprando
-    .col-md-6.col-sm-6.text-right
-      if items && items.length > 0
-        a.btn.btn-primary(href="/carrinho/checkout") Finalizar pedido
+    .row
+      .col-md-6.col-sm-6
+        a.btn.btn-default(href="/") Continuar comprando
+      .col-md-6.col-sm-6.text-right
+        if items && items.length > 0
+          a.btn.btn-primary.btn-lg(href="/carrinho/checkout")
+            i.fa.fa-check
+            |  Finalizar compra

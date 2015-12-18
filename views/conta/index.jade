@@ -4,25 +4,26 @@ block topo
   .container-topo
   
 block content
-  .row
-    .col-md-3
-      h4 Meus dados
+  .container
+    .row
+      .col-md-3
+        h4 Meus dados
 
-      form(method="post")
-        .row
-          .col-md-12
-            .form-group
-              label(for="nome") Nome
-              input.form-control(type="text" id="nome" name="nome" value="#{usuario.nome}")
-        .row
-          .col-md-12
-            .form-group
-              label(for="email") E-mail
-              input.form-control(type="email" id="email" name="email" value="#{usuario.email}")
-        .row
-          .col-md-6
-            .form-group
-              label(for="senha") Nova senha
-              input.form-control(type="password" id="senha" name="senha")
-          
-        button.btn.btn-default(type="submit") Gravar
+        form(method="post")
+          .row
+            .col-md-12
+              .form-group
+                label(for="nome") Nome
+                input.form-control(type="text" id="nome" name="nome" value="#{usuario.nome}")
+          .row
+            .col-md-12
+              .form-group
+                label(for="email") E-mail
+                input.form-control(type="email" id="email" name="email" value="#{usuario.email}")
+          .row
+            .col-md-6
+              .form-group
+                label(for="senha") Nova senha
+                input.form-control(type="password" id="senha" name="senha")
+            
+          button.btn.btn-default(type="submit") Gravar
