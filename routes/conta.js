@@ -109,4 +109,20 @@ router.get('/sair',function(req, res, next) {
   });
 });
 
+
+router.post('/checkemail', function(req, res, next) {
+  Usuario.findOne({email:req.body.email}, function(err, usuario) {
+    if(err) {
+      res.json({ status: 'ERROR' });
+    } else {
+      if(usuario) {
+        res.json({ status: 'SUCCESS' });
+      } else {
+        res.json({ status: 'NOTFOUND' });
+      }
+    }
+  });
+});
+
+
 module.exports = router;

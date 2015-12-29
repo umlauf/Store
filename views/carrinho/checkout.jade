@@ -30,36 +30,126 @@ block content
               tr
                 td(colspan="4").text-right
                   h3#total #{totalFormatado}
-                  
-
-          if session && session.user
-            .row
-              .col-md-4.col-sm-4
-                .panel.panel-default
-                  .panel-body
-                    h4
-                      i.fa.fa-user
-                      |  Seus dados
-              .col-md-4.col-sm-4
-                .panel.panel-default
-                  .panel-body
-                    h4
-                      i.fa.fa-map-marker
-                      |  Entrega
-              .col-md-4.col-sm-4
-                .panel.panel-default
-                  .panel-body
-                    h4
-                      i.fa.fa-money
-                      |  Pagamento
-          else
-            form(method="post")
-              .row
-                .col-md-3
-                  .form-group
-                    label(for="email") Email
-                    input.form-control(type="text" id="email" name="email")
-                  button.btn.btn-default(type="submit") Prosseguir
-
         else
           p Seu carrinho está vazio!
+
+
+
+    if items && items.length > 0
+      if !session || !session.user
+        .row#emailForm
+          .col-md-12.col-sm-12
+              form(method="post")
+                .row
+                  .col-md-6
+                    #emailGroup.form-group
+                      h4
+                        label(for="email" id="labelEmail") Digite seu e-mail para continuar
+                      input.form-control(type="email" id="email" name="email")
+                      span#helpEmail.help-block
+                  .col-md-6
+                    .form-group
+                      h4
+                        label &nbsp;
+                      button.btn.btn-default#btnEmail(type="button" onclick="checkEmail();") OK
+                #loginSenha.row.escondido
+                  .col-md-4
+                    h4
+                      label(for="senhaEmail") Senha
+                    input.form-control(type="password" id="senhaEmail" name="senhaEmail")
+                  .col-md-6
+                    .form-group
+                      h4
+                        label &nbsp;
+                      button.btn.btn-default#btnLogin(type="button" onclick="login();") Continuar
+                #loginOpcoes.row.escondido
+                  .col-md-6
+                    a(href="#" onclick="mostraCadastro();") Novo cadastro
+  
+      div(id="checkoutForm", class="#{session && session.user ? 'row mg-tp-20' : 'row mg-tp-20 escondido'}")
+        .col-md-4.col-sm-4
+          .panel.panel-default
+            .panel-body
+              h5
+                i.fa.fa-user
+                |  Seus dados ou faça o 
+                a(href="#" onclick="mostraLogin();") Login
+
+              .row
+                .col-md-12
+                  .form-group
+                    label(for="emailcadastro") Email
+                    input.form-control(type="email" id="emailcadastro" name="emailcadastro")
+                
+              .row
+                .col-md-6
+                  .form-group
+                    label(for="senha") Senha
+                    input.form-control(type="password" id="senha" name="senha")
+                .col-md-6
+                  .form-group
+                    label(for="senhar") Confirmar senha
+                    input.form-control(type="password" id="senhar" name="senhar")                
+
+              .row
+                .col-md-12
+                  .form-group
+                    label(for="nome") Nome completo
+                    input.form-control(type="text" id="nome" name="nome")
+                
+              .row
+                .col-md-6
+                  .form-group
+                    label(for="cpf") CPF
+                    input.form-control(type="text" id="cpf" name="cpf")
+              
+              .row
+                .col-md-6
+                  .form-group
+                    label(for="sexo") Sexo
+                    select.form-control(id="sexo" name="sexo")
+                      option(value="", text="Selecione")
+                      option(value="F", text="Feminino")
+                      option(value="M", text="Masculino")
+                .col-md-6
+                  .form-group
+                    label(for="datanasc") Data de nascimento
+                    input.form-control(type="date" id="datanasc" name="datanasc" format="dd/mm/yyyy")
+    
+              .row
+                .col-md-6
+                  .form-group
+                    label(for="celular") Celular
+                    input.form-control(type="text" id="celular" name="celular") 
+                .col-md-6
+                  .form-group
+                    label(for="telefone") Telefone fixo
+                    input.form-control(type="text" id="telefone" name="telefone")                    
+                          
+        .col-md-4.col-sm-4
+          .panel.panel-default
+            .panel-body
+              h5
+                i.fa.fa-map-marker
+                |  Entrega
+                
+              .row
+                .col-md-6
+                  .form-group
+                    label(for="cep") CEP
+                    input.form-control(type="text" id="cep" name="cep")
+                
+                
+        .col-md-4.col-sm-4
+          .panel.panel-default
+            .panel-body
+              h5
+                i.fa.fa-money
+                |  Pagamento
+            
+
+          
+  
+  
+  
+  script(src='/javascripts/checkout.bundle.js')

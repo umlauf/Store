@@ -1,8 +1,12 @@
 module.exports = {
-  entry: './main.js',
+  entry: {
+    main:'./main.js',
+    checkout:'./checkout.js'
+  },
   output: {
     path: "../public/javascripts/",
     filename: "[name].bundle.js",
+    // chunkFilename: "[id].bundle.js",
     publicPath: "/javascripts/"
   },
   module: {
