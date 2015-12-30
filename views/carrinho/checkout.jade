@@ -66,90 +66,140 @@ block content
                   .col-md-6
                     a(href="#" onclick="mostraCadastro();") Novo cadastro
   
-      div(id="checkoutForm", class="#{session && session.user ? 'row mg-tp-20' : 'row mg-tp-20 escondido'}")
-        .col-md-4.col-sm-4
-          .panel.panel-default
-            .panel-body
-              h5
-                i.fa.fa-user
-                |  Seus dados ou faça o 
-                a(href="#" onclick="mostraLogin();") Login
+      form
+        div(id="checkoutForm", class="#{session && session.user ? 'row mg-tp-20' : 'row mg-tp-20 escondido'}")
+          .col-md-4.col-sm-4
+            .panel.panel-default
+              .panel-body
+                h4
+                  i.fa.fa-user
+                  |  Seus dados ou faça o 
+                  a(href="#" onclick="mostraLogin();") Login
 
-              .row
-                .col-md-12
-                  .form-group
-                    label(for="emailcadastro") Email
-                    input.form-control(type="email" id="emailcadastro" name="emailcadastro")
-                
-              .row
-                .col-md-6
-                  .form-group
-                    label(for="senha") Senha
-                    input.form-control(type="password" id="senha" name="senha")
-                .col-md-6
-                  .form-group
-                    label(for="senhar") Confirmar senha
-                    input.form-control(type="password" id="senhar" name="senhar")                
+                .row
+                  .col-md-12
+                    .form-group
+                      label(for="emailcadastro") Email
+                      input.form-control(type="email" id="emailcadastro" name="emailcadastro")
+                  
+                .row
+                  .col-md-6
+                    .form-group
+                      label(for="senha") Senha
+                      input.form-control(type="password" id="senha" name="senha")
+                  .col-md-6
+                    .form-group
+                      label(for="senhar") Confirmar senha
+                      input.form-control(type="password" id="senhar" name="senhar")                
 
-              .row
-                .col-md-12
-                  .form-group
-                    label(for="nome") Nome completo
-                    input.form-control(type="text" id="nome" name="nome")
+                .row
+                  .col-md-12
+                    .form-group
+                      label(for="nome") Nome completo
+                      input.form-control(type="text" id="nome" name="nome")
+                  
+                .row
+                  .col-md-6
+                    .form-group
+                      label(for="cpf") CPF
+                      input.form-control(type="text" id="cpf" name="cpf")
                 
-              .row
-                .col-md-6
-                  .form-group
-                    label(for="cpf") CPF
-                    input.form-control(type="text" id="cpf" name="cpf")
-              
-              .row
-                .col-md-6
-                  .form-group
-                    label(for="sexo") Sexo
-                    select.form-control(id="sexo" name="sexo")
-                      option(value="", text="Selecione")
-                      option(value="F", text="Feminino")
-                      option(value="M", text="Masculino")
-                .col-md-6
-                  .form-group
-                    label(for="datanasc") Data de nascimento
-                    input.form-control(type="date" id="datanasc" name="datanasc" format="dd/mm/yyyy")
-    
-              .row
-                .col-md-6
-                  .form-group
-                    label(for="celular") Celular
-                    input.form-control(type="text" id="celular" name="celular") 
-                .col-md-6
-                  .form-group
-                    label(for="telefone") Telefone fixo
-                    input.form-control(type="text" id="telefone" name="telefone")                    
-                          
-        .col-md-4.col-sm-4
-          .panel.panel-default
-            .panel-body
-              h5
-                i.fa.fa-map-marker
-                |  Entrega
-                
-              .row
-                .col-md-6
-                  .form-group
-                    label(for="cep") CEP
-                    input.form-control(type="text" id="cep" name="cep")
-                
-                
-        .col-md-4.col-sm-4
-          .panel.panel-default
-            .panel-body
-              h5
-                i.fa.fa-money
-                |  Pagamento
-            
-
-          
-  
+                .row
+                  .col-md-6
+                    .form-group
+                      label(for="sexo") Sexo
+                      select.form-control(id="sexo" name="sexo")
+                        option(value="", text="Selecione")
+                        option(value="F", text="Feminino")
+                        option(value="M", text="Masculino")
+                  .col-md-6
+                    .form-group
+                      label(for="datanasc") Data de nascimento
+                      input.form-control(type="date" id="datanasc" name="datanasc" format="dd/mm/yyyy")
+      
+                .row
+                  .col-md-6
+                    .form-group
+                      label(for="celular") Celular
+                      input.form-control(type="text" id="celular" name="celular") 
+                  .col-md-6
+                    .form-group
+                      label(for="telefone") Telefone fixo
+                      input.form-control(type="text" id="telefone" name="telefone")                    
+                            
+          .col-md-4.col-sm-4
+            .panel.panel-default
+              .panel-body
+                h4
+                  i.fa.fa-map-marker
+                  |  Entrega
+                  
+                .row
+                  .col-md-6
+                    .form-group#cepGroup
+                      label(for="cep") CEP
+                      input.form-control(type="text" id="cep" name="cep" onkeyup="buscaCep();")
+                      span.helper-text#cepHelperText
+                  .col-md-6
+                    #cepProgress
+                    //- .form-group
+                    //-   h6
+                    //-     label &nbsp;
+                    //-   button.btn.btn-default#btnBuscaCep(type="button" onclick="buscaCep();") Buscar
+                .row
+                  .col-md-12
+                    .form-group
+                      label(for="logradouro") Logradouro
+                      input.form-control(type="text" id="logradouro" name="logradouro")
+                .row
+                  .col-md-6
+                    .form-group
+                      label(for="numero") Número
+                      input.form-control(type="text" id="numero" name="numero")
+                  .col-md-6
+                    .form-group
+                      label(for="complemento") Complemento
+                      input.form-control(type="text" id="complemento" name="complemento")
+                .row
+                  .col-md-12
+                    .form-group
+                      label(for="bairro") Bairro
+                      input.form-control(type="text" id="bairro" name="bairro")
+                .row
+                  .col-md-12
+                    .form-group
+                      label(for="cidade") Cidade
+                      input.form-control(type="text" id="cidade" name="cidade")
+                .row
+                  .col-md-3
+                    .form-group
+                      label(for="estado") Estado
+                      input.form-control(type="text" id="estado" name="estado")
+                .row
+                  .col-md-12
+                    #frete
+                  
+          .col-md-4.col-sm-4
+            .panel.panel-default
+              .panel-body
+                h4
+                  i.fa.fa-money
+                  |  Pagamento
+                .row
+                  .col-md-12
+                    .radio
+                      input#radio1(type="radio" name="formapgto" value="pagseguro")
+                      label(for="radio1")
+                        img(src="/images/pagseguro.png" alt="PagSeguro")
+                    .radio
+                      input#radio2(type="radio" name="formapgto" value="paypal")
+                      label(for="radio2")
+                        img(src="/images/paypal.png" alt="PayPal")
+                .row
+                  .col-md-12.text-center.pd-tp-50
+                    button.btn.btn-primary.btn-lg#btnFinalizar(type="button")
+                      i.fa.fa-check
+                      |  Finalizar compra
   
   
   script(src='/javascripts/checkout.bundle.js')
