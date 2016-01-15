@@ -1,30 +1,21 @@
 var express = require('express');
 var session = require('express-session');
-var MongoDBStore = require('connect-mongodb-session')(session);
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-require('./db');
+var pg = require('pg')
+  , pgSession = require('connect-pg-simple')(session);
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var produtos = require('./routes/produtos');
 var conta = require('./routes/conta');
 var carrinho = require('./routes/carrinho');
 var checkout = require('./routes/checkout');
 
 var app = express();
-var store = new MongoDBStore({
-    uri: 'mongodb://localhost:27017/owstore_sessions',
-    collection: 'sessions'
-  });
-
-store.on('error', function(error) {
-  assert.ifError(error);
-  assert.ok(false);
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,14 +23,16 @@ app.set('view engine', 'jade');
 
 app.locals.sprintf = require("sprintf-js").sprintf;
 
-//app.use(session({secret: 'ssshhhhh'}));
-//http://stackoverflow.com/questions/24477035/express-4-0-express-session-with-odd-warning-message
-app.use(require('express-session')({
-  secret: 'owstoresecret',
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-  },
+var store = new pgSession({
+  pg: pg,
+  conString: 'postgres://postgres:123@localhost:5432/owstore_session',
+  tableName: 'session'
+});
+
+app.use(session({
   store: store,
+  secret: 'owstoresecret',
+  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 1 week
   resave: true,
   saveUninitialized: true
 }));
@@ -59,7 +52,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.use('/', routes);
+app.use('/', index);
 app.use('/produtos', produtos);
 app.use('/conta', conta);
 app.use('/carrinho', carrinho);

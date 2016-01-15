@@ -1,33 +1,30 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Produto = mongoose.model('produtos');
 var Price = require('format-price');
+var Produto = require('../model/produto');
+var _ = require('lodash');
 
 
 var produtosDoBd = function(carrinho, prox) {
-  var predicate = [];
-  carrinho.items.forEach(function(item) {
-    predicate.push(item.produto_id);
-    //console.log(item.produto_id);
-  });
+  var predicate = _.pluck(carrinho.items, 'produto_id');
 
   var total = 0;
-  Produto.find({ _id: { $in: predicate } }, function(err, produtos) {
-    // TODO: melhorar esse loop dentro de loop.
-    if(produtos) {
-      produtos.forEach(function(produto) {
-        carrinho.items.forEach(function(item) {
-          if(produto._id == item.produto_id) {
-            produto.qtde = item.qtde;
-            produto.valorTotalFormatado = Price.format( 'pt-BR', 'BRL', produto.valor * produto.qtde);
-            total += produto.valor * produto.qtde;
-          }
-        });
+  var p;
+
+  Produto.query('whereIn', 'produto_id', predicate)
+    .fetchAll()
+    .then(function(produtos) {
+      var produtosJson = produtos.toJSON();
+      produtosJson.forEach(function(produto) {
+        p = _.find(carrinho.items, 'produto_id', _(produto.produto_id).toString());
+        if(p) {
+          produto.qtde = p.qtde;
+          produto.valorTotalFormatado = Price.format( 'pt-BR', 'BRL', produto.valor * produto.qtde);
+          total += produto.valor * produto.qtde;
+        }
       });
-    }
-    prox(produtos, total);
-  });
+      prox(produtosJson, total);
+    });
 };
 
 
@@ -65,7 +62,6 @@ router.get('/checkout', function(req, res, next) {
 });
 
 
-
 router.get('/:produto_id', function(req, res, next) {
   if(!req.session.carrinho) {
     req.session.carrinho = { items: [] };
@@ -92,13 +88,10 @@ router.get('/update/:produto_id',
         //console.log("Produto Achado = " + item.produto_id + " no índice " + i);
         item.qtde = req.query.q;
         req.session.save(function(err) {
-          // session saved
           if(err) {
-            //res.json({ status: 'ERROR', msg: err });
             req.status = 'ERROR';
             req.msg = err;
           } else {
-            //res.json({ status: 'SUCCESS' });
             req.status = 'SUCCESS';
           }
           next();

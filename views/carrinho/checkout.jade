@@ -24,7 +24,7 @@ block content
               each item, i in items
                 tr
                   td #{item.nome}
-                  td.text-right #{item.valorFormatado()}
+                  td.text-right #{item.valorFormatado}
                   td.text-right #{item.qtde}
                   td.text-right(id="total-#{item._id}") #{item.valorTotalFormatado}
               tr
