@@ -1,34 +1,36 @@
-# owstore
+# Store
 
-### Dependências
+A simple store using Node.js, Express and MongoDB. Check out the pg branch for the PostgreSQL version.
+
+### Dependencies
 
 * [Node.js](https://nodejs.org)
 * [MongoDB](https://www.mongodb.com)
 
-### Carregando dados iniciais no banco de dados
+### Seeding the databse
 
-Na pasta db:
+cd to the db folder and execute:
 
     mongoimport --db owstore --collection produtos --file produtos.json --drop
 
-### Instalando as dependências
+### Installing the dependencies
 
 #### Webpack:
 
     npm install webpack -g
 
-#### Dependências da aplicação:
+#### Application dependencies:
 
-Em /:
+On the root folder:
 
     npm install
 
-### Iniciando a aplicação
+### Starting the application
 
-1. Inicie o mongod
+1. Start mongod
 
-2. Em /:
+2. On the roor folder:
 
         npm start
 
-3. Acesse http://localhost:3000
+3. Acess http://localhost:3000
