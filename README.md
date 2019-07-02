@@ -1,17 +1,20 @@
 # Store
 
-A simple store using Node.js, Express and MongoDB. Check out the pg branch for the PostgreSQL version.
+A simple store using Node.js, Express and PostgreSQL. Check out the pg branch for the MongoDB version.
 
 ### Dependencies
 
 * [Node.js](https://nodejs.org)
-* [MongoDB](https://www.mongodb.com)
+* [PostgreSQL](https://www.postgresql.org)
+
+### Create the tables
+
+    knex migrate:latest
 
 ### Seeding the databse
 
-cd to the db folder and execute:
-
-    mongoimport --db owstore --collection produtos --file produtos.json --drop
+    knex seed:make 001_produtos --env development
+    knex seed:make 002_imagens --env development
 
 ### Installing the dependencies
 
