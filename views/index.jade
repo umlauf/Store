@@ -16,11 +16,13 @@ block topo
       each destaque, i in destaques
         if(i == 0)
           .item.active
-            img(src='images/#{destaque.imagens.destaque}', alt='#{destaque.nome}')
+            img(src='images/#{destaque.imagens[0].destaque}', alt='#{destaque.nome}')
+            //- img(src='images/#{destaque.destaque}', alt='#{destaque.nome}')
             .carousel-caption #{destaque.nome}
         else
           .item
-            img(src='images/#{destaque.imagens.destaque}', alt='#{destaque.nome}')
+            img(src='images/#{destaque.imagens[0].destaque}', alt='#{destaque.nome}')
+            //-img(src='images/#{destaque.destaque}', alt='#{destaque.nome}')
             .carousel-caption #{destaque.nome}
                   
     // Controls
@@ -39,13 +41,15 @@ block content
       each p in produtos
         .col-md-3
           .thumbnail
-            img(src='images/#{p.imagens.normal}', alt='#{p.nome}')
+            img(src='images/#{p.imagens[0].normal}', alt='#{p.nome}')
+            //- img(src='images/#{p.normal}', alt='#{p.nome}')
             .caption
               .row
                 .col-md-8
-                  h4 #{p.valorFormatado()}
+                  //- h4 #{p.valorFormatado()}
+                  h4 #{p.valorFormatado}
                 .col-md-4.text-right
-                  a.btn.btn-default(href="/carrinho/#{p._id}")
+                  a.btn.btn-default(href="/carrinho/#{p.produto_id}")
                     i.fa.fa-cart-plus.fa-lg
               h5 #{p.nome}
               p #{p.descricao}
