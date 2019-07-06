@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+var dotenv = require('dotenv').config();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -25,13 +26,13 @@ app.locals.sprintf = require("sprintf-js").sprintf;
 
 var store = new pgSession({
   pg: pg,
-  conString: 'postgres://postgres:123@localhost:5432/owstore_session',
+  conString: process.env.PG_SESSION_URL,
   tableName: 'session'
 });
 
 app.use(session({
   store: store,
-  secret: 'owstoresecret',
+  secret: process.env.SESSION_SECRET,
   cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 1 week
   resave: true,
   saveUninitialized: true

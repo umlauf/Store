@@ -3,7 +3,7 @@
 var dbConfig = {
   //debug: true,
   client: 'pg',
-  connection: "postgres://postgres:123@localhost:5432/owstore",
+  connection: process.env.BOOKSHELF_DB_URL
 };
 
 var knex = require('knex')(dbConfig);
