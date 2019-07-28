@@ -2,16 +2,10 @@ var express = require('express');
 var router = express.Router();
 var Produto = require('../model/produto');
 
-require("node-jsx").install({harmony: true, extension: ".jsx"});
-
-var React = require("react"),
-    App = React.createFactory(require("../components/app"));
-
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var content = ""; //React.renderToString(App());
+  var content = "";
 
   Produto.where('destaque', true).fetchAll({withRelated: ['imagens']}).then(function(destaques) {
     Produto.where('destaque', false).fetchAll({withRelated: ['imagens']}).then(function(produtos) {

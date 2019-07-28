@@ -1,9 +1,10 @@
-require('expose?$!expose?jQuery!jquery');
-require("bootstrap-webpack!./bootstrap.config.js");
-require("font-awesome-webpack");
+import 'bootstrap';
+import '../public/css/index.scss';
+
+
 var Price = require('format-price');
 
-updateCart = function(produto_id) {
+var updateCart = function(produto_id) {
   var qtd = $("#nome-" + produto_id).val();
 
   $.ajax({

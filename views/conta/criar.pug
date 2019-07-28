@@ -2,14 +2,18 @@ extends ../layout
 
 block topo
   .container-topo
-  
+
 block content
   .container
-    h3 Entrar
-    
-    .row
-      .col-md-6
-        form(method="post")
+    form(method="post")
+      .row
+        .col-md-4
+          .form-group
+            label(for="nome") Nome
+            input.form-control(type="text" id="nome" name="nome")
+          .form-group
+            label(for="email") E-mail
+            input.form-control(type="email" id="email" name="email")
           .row
             .col-md-6
               .form-group
@@ -20,8 +24,5 @@ block content
               .form-group
                 label(for="senha") Senha
                 input.form-control(type="password" id="senha" name="senha")
-          
-          button.btn.btn-default(type="submit") Entrar
-
-          if message != undefined && message != ""
-            .alert.alert-danger.mg-tp-20(role="alert") #{message}
+        
+      button.btn.btn-primary(type="submit") Gravar
