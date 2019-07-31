@@ -1,5 +1,5 @@
 extends ../layout
-include mixins/menu.jade
+include mixins/menu.pug
 
 block topo
   .container-topo
@@ -14,4 +14,4 @@ block content
         ul
             each produto, i in produtos
                 li
-                    a(href="/produtos/#{produto.produto_id}")= produto.nome
+                    a(href="/produtos/" + produto.produto_id)= produto.nome
