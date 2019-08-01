@@ -7,30 +7,30 @@ block topo
     ol.carousel-indicators
       each destaque, i in destaques
         if(i == 0)
-          li.active(data-target='#destaques', data-slide-to='#{i}')
+          li.active(data-target='#destaques', data-slide-to=`${i}`)
         else
-          li(data-target='#destaques', data-slide-to='#{i}')
+          li(data-target='#destaques', data-slide-to=`${i}`)
       
     // Wrapper for slides
     .carousel-inner(role='listbox')
       each destaque, i in destaques
         if(i == 0)
-          .item.active
-            img(src='images/#{destaque.imagens[0].destaque}', alt='#{destaque.nome}')
+          .carousel-item.active
+            img(src=`images/${destaque.imagens[0].destaque}`, alt=`${destaque.nome}`)
             //- img(src='images/#{destaque.destaque}', alt='#{destaque.nome}')
             .carousel-caption #{destaque.nome}
         else
-          .item
-            img(src='images/#{destaque.imagens[0].destaque}', alt='#{destaque.nome}')
+          .carousel-item
+            img(src=`images/${destaque.imagens[0].destaque}`, alt=`${destaque.nome}`)
             //-img(src='images/#{destaque.destaque}', alt='#{destaque.nome}')
             .carousel-caption #{destaque.nome}
                   
     // Controls
-    a.left.carousel-control(href='#destaques', role='button', data-slide='prev')
-      span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+    a.carousel-control-prev(href='#destaques', role='button', data-slide='prev')
+      span.carousel-control-prev-icon(aria-hidden='true')
       span.sr-only Previous
-    a.right.carousel-control(href='#destaques', role='button', data-slide='next')
-      span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+    a.carousel-control-next(href='#destaques', role='button', data-slide='next')
+      span.carousel-control-next-icon(aria-hidden='true')
       span.sr-only Next
 
 block content
@@ -41,7 +41,7 @@ block content
       each p in produtos
         .col-md-3
           .thumbnail
-            img(src='images/#{p.imagens[0].normal}', alt='#{p.nome}')
+            img(src=`images/${p.imagens[0].normal}`, alt=`${p.nome}`)
             //- img(src='images/#{p.normal}', alt='#{p.nome}')
             .caption
               .row
@@ -49,7 +49,7 @@ block content
                   //- h4 #{p.valorFormatado()}
                   h4 #{p.valorFormatado}
                 .col-md-4.text-right
-                  a.btn.btn-default(href="/carrinho/#{p.produto_id}")
+                  a.btn.btn-default(href=`/carrinho/${p.produto_id}`)
                     i.fa.fa-cart-plus.fa-lg
               h5 #{p.nome}
               p #{p.descricao}
